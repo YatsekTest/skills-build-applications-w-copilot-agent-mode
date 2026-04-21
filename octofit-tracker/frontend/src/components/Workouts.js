@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState([]);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/workouts/`;
+  let endpoint = '';
+  if (process.env.REACT_APP_CODESPACE_NAME) {
+    endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`;
+  } else {
+    endpoint = `http://localhost:8000/api/workouts/`;
+  }
 
   useEffect(() => {
     console.log('Fetching Workouts from:', endpoint);
